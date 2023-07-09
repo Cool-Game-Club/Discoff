@@ -244,7 +244,7 @@ TextureImporter:
       name: Room_5
       rect:
         serializedVersion: 2
-        x: 32
+        x: 0
         y: 96
         width: 32
         height: 32
@@ -265,7 +265,7 @@ TextureImporter:
       name: Room_6
       rect:
         serializedVersion: 2
-        x: 64
+        x: 32
         y: 96
         width: 32
         height: 32
@@ -286,7 +286,7 @@ TextureImporter:
       name: Room_7
       rect:
         serializedVersion: 2
-        x: 96
+        x: 64
         y: 96
         width: 32
         height: 32
@@ -307,8 +307,8 @@ TextureImporter:
       name: Room_8
       rect:
         serializedVersion: 2
-        x: 64
-        y: 64
+        x: 96
+        y: 96
         width: 32
         height: 32
       alignment: 0
@@ -328,8 +328,8 @@ TextureImporter:
       name: Room_9
       rect:
         serializedVersion: 2
-        x: 32
-        y: 32
+        x: 64
+        y: 64
         width: 32
         height: 32
       alignment: 0
@@ -349,7 +349,7 @@ TextureImporter:
       name: Room_10
       rect:
         serializedVersion: 2
-        x: 64
+        x: 32
         y: 32
         width: 32
         height: 32
@@ -370,7 +370,7 @@ TextureImporter:
       name: Room_11
       rect:
         serializedVersion: 2
-        x: 96
+        x: 64
         y: 32
         width: 32
         height: 32
@@ -391,8 +391,8 @@ TextureImporter:
       name: Room_12
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
+        x: 96
+        y: 32
         width: 32
         height: 32
       alignment: 0
@@ -412,7 +412,7 @@ TextureImporter:
       name: Room_13
       rect:
         serializedVersion: 2
-        x: 128
+        x: 0
         y: 0
         width: 32
         height: 32
@@ -425,6 +425,27 @@ TextureImporter:
       bones: []
       spriteID: 21975ef28eaeea04290bda42dd2bd4ba
       internalID: 853568175
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Room_14
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: eb9ee218e17c6fd42b1093e0adb58e93
+      internalID: -682841800
       vertices: []
       indices: 
       edges: []
@@ -446,6 +467,7 @@ TextureImporter:
       Room_11: 1968341989
       Room_12: 433103024
       Room_13: 853568175
+      Room_14: -682841800
       Room_2: -1918242488
       Room_3: 2099675178
       Room_4: 1314648751
