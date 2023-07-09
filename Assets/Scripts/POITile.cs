@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-[CreateAssetMenu]
+[CreateAssetMenu(menuName = "2D/Tiles/POI")]
 public class POITile : Tile
 {
     [SerializeField] private POIType _type;

@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 9220947190ddf584dad7ec0ebf625040
+guid: b054a5a8952a88941b97595c6838334b
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -136,11 +136,11 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Room_0
+      name: Roof_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 128
+        y: 32
         width: 32
         height: 32
       alignment: 0
@@ -150,18 +150,18 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9620b11632906784daa2764589341b70
-      internalID: -1650640721
+      spriteID: 5de1afecc8a61c8429da484207d15efe
+      internalID: 360251103
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Room_1
+      name: Roof_1
       rect:
         serializedVersion: 2
         x: 32
-        y: 128
+        y: 32
         width: 32
         height: 32
       alignment: 0
@@ -171,18 +171,18 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: dbf5c0956b184b74080b4ce02b48b049
-      internalID: -928083787
+      spriteID: de43c583ffd57694ab35c425342e6dd3
+      internalID: 788741687
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Room_2
+      name: Roof_2
       rect:
         serializedVersion: 2
         x: 64
-        y: 128
+        y: 32
         width: 32
         height: 32
       alignment: 0
@@ -192,18 +192,18 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b033ea26ca15ae24eb0fb30dde9ab998
-      internalID: -1918242488
+      spriteID: 186e8fd8947b93c48b0ce6070524c287
+      internalID: -354846708
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Room_3
+      name: Roof_3
       rect:
         serializedVersion: 2
         x: 96
-        y: 128
+        y: 32
         width: 32
         height: 32
       alignment: 0
@@ -213,143 +213,17 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0c97042c616a6c94f80329e07b4cd670
-      internalID: 2099675178
+      spriteID: fcf18865f790d2249bfc501df75bd5c7
+      internalID: -1928360818
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Room_4
+      name: Roof_4
       rect:
         serializedVersion: 2
         x: 128
-        y: 128
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: aba2e803d2ec0a64eb3d0a7562945a33
-      internalID: 1314648751
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Room_5
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 96
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: ceb5677f618ec1841b8c814fb986dead
-      internalID: -1860287803
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Room_6
-      rect:
-        serializedVersion: 2
-        x: 32
-        y: 96
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 4b0163f7f9e47794a9a98fce64b3f51d
-      internalID: 1915896530
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Room_7
-      rect:
-        serializedVersion: 2
-        x: 64
-        y: 96
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: e5a5199cc44ecb648a8361877c1d90a0
-      internalID: -811831268
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Room_8
-      rect:
-        serializedVersion: 2
-        x: 96
-        y: 96
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 40400816e701fc2458f664f57a236dd1
-      internalID: -1423650307
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Room_9
-      rect:
-        serializedVersion: 2
-        x: 64
-        y: 64
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 2c05ebc72d7ffa248b30026f60d8aa96
-      internalID: -1938853567
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Room_10
-      rect:
-        serializedVersion: 2
-        x: 32
         y: 32
         width: 32
         height: 32
@@ -360,17 +234,17 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0ed6368a69805004f86189cb4caa1666
-      internalID: -1471001963
+      spriteID: 4f41e3018bd0e254aa497777429b8ebc
+      internalID: -1315234070
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Room_11
+      name: Roof_5
       rect:
         serializedVersion: 2
-        x: 64
+        x: 160
         y: 32
         width: 32
         height: 32
@@ -381,17 +255,17 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a9b3edcd2a522b64b8fd82f83b462e67
-      internalID: 1968341989
+      spriteID: e1f530ef46ede11439fea45e7e06f3c7
+      internalID: -1804447822
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Room_12
+      name: Roof_6
       rect:
         serializedVersion: 2
-        x: 96
+        x: 192
         y: 32
         width: 32
         height: 32
@@ -402,14 +276,77 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a1410247bf1fd7143a711d2f6978c207
-      internalID: 433103024
+      spriteID: be23bf80c40bef84da7a76b4215dde88
+      internalID: 2114135280
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Room_13
+      name: Roof_7
+      rect:
+        serializedVersion: 2
+        x: 224
+        y: 32
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 21fbddd97f317384697e0224b1fa0cea
+      internalID: -1459558088
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Roof_8
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 32
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6ad1664980673974395190bf2ab878f0
+      internalID: 1543439291
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Roof_9
+      rect:
+        serializedVersion: 2
+        x: 288
+        y: 32
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 89b25887c5bb25e498cb57a8186aa84a
+      internalID: -1031663496
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Roof_10
       rect:
         serializedVersion: 2
         x: 0
@@ -423,17 +360,17 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 21975ef28eaeea04290bda42dd2bd4ba
-      internalID: 853568175
+      spriteID: 3fff1f0174b852a458b3a3b954316b8e
+      internalID: -305468140
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Room_14
+      name: Roof_11
       rect:
         serializedVersion: 2
-        x: 128
+        x: 32
         y: 0
         width: 32
         height: 32
@@ -444,8 +381,50 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: eb9ee218e17c6fd42b1093e0adb58e93
-      internalID: -682841800
+      spriteID: e9ef3940615ed3b45a524852e1bc3d24
+      internalID: -1415487633
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Roof_12
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9c14cfd0e91ae9e4abe870e9f59b98f7
+      internalID: 964874446
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Roof_13
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 49f1823bca19f1e479bfa17266f6200a
+      internalID: -1499541003
       vertices: []
       indices: 
       edges: []
@@ -461,21 +440,20 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Room_0: -1650640721
-      Room_1: -928083787
-      Room_10: -1471001963
-      Room_11: 1968341989
-      Room_12: 433103024
-      Room_13: 853568175
-      Room_14: -682841800
-      Room_2: -1918242488
-      Room_3: 2099675178
-      Room_4: 1314648751
-      Room_5: -1860287803
-      Room_6: 1915896530
-      Room_7: -811831268
-      Room_8: -1423650307
-      Room_9: -1938853567
+      Roof_0: 360251103
+      Roof_1: 788741687
+      Roof_10: -305468140
+      Roof_11: -1415487633
+      Roof_12: 964874446
+      Roof_13: -1499541003
+      Roof_2: -354846708
+      Roof_3: -1928360818
+      Roof_4: -1315234070
+      Roof_5: -1804447822
+      Roof_6: 2114135280
+      Roof_7: -1459558088
+      Roof_8: 1543439291
+      Roof_9: -1031663496
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
