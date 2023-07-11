@@ -3,12 +3,12 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-namespace CoolGameClub.Assets.Scripts.Map
+namespace CoolGameClub.Map
 {
     public class LevelManager : Singleton<LevelManager>
     {
         [SerializeField] private Tilemap _levelTilemap;
-    
+
         private List<Room> _roomSelection;
 
         [Header("Prefabs")]
@@ -27,7 +27,8 @@ namespace CoolGameClub.Assets.Scripts.Map
             //Dictionary<Vector3Int, TileBase> POITiles = room.GetPOITiles();
         }
 
-        private struct RoomNode {
+        private struct RoomNode
+        {
             public Room Room;
 
             public Room RoomLeft;

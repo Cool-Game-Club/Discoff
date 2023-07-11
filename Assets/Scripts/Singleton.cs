@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace CoolGameClub.Assets.Scripts
+namespace CoolGameClub
 {
     public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
     {

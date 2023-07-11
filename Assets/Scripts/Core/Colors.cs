@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace CoolGameClub.Assets.Scripts.Core
+namespace CoolGameClub.Core
 {
     public static class Colors
     {
@@ -8,7 +8,8 @@ namespace CoolGameClub.Assets.Scripts.Core
             return (Type)Random.Range(0, System.Enum.GetValues(typeof(Type)).Length);
         }
 
-        public enum Type {
+        public enum Type
+        {
             Red, Green, Blue, Purple
         }
     }

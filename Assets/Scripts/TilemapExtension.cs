@@ -2,9 +2,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-namespace CoolGameClub.Assets.Scripts
+namespace CoolGameClub
 {
-    public static class TilemapExtension {
+    public static class TilemapExtension
+    {
         public static List<T> FindTiles<T>(this Tilemap tilemap) where T : Tile {
             List<T> tiles = new();
 

@@ -1,11 +1,12 @@
-using CoolGameClub.Assets.Scripts.Core;
+using CoolGameClub.Core;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-namespace CoolGameClub.Assets.Scripts.Map
+namespace CoolGameClub.Map
 {
     [CreateAssetMenu(menuName = "2D/Tiles/Dance Floor")]
-    public class DanceFloorTile : Tile {
+    public class DanceFloorTile : Tile
+    {
         [SerializeField] private Colors.Type type;
     }
 }

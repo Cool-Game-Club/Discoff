@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-namespace CoolGameClub.Assets.Scripts.Map
+namespace CoolGameClub.Map
 {
     [CreateAssetMenu(menuName = "2D/Tiles/POI")]
     public class POITile : Tile
@@ -9,10 +9,11 @@ namespace CoolGameClub.Assets.Scripts.Map
         [SerializeField] private POIType _type;
         public POIType Type => _type;
 
-        public enum POIType {
+        public enum POIType
+        {
             Bar,
             EnemySpawn,
-            DoorLeft, 
+            DoorLeft,
             DoorRight,
             DoorDown,
             DoorUp,

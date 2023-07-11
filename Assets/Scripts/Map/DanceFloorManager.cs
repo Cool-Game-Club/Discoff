@@ -1,11 +1,11 @@
-using CoolGameClub.Assets.Scripts.Core;
+using CoolGameClub.Core;
 using UnityEngine;
 
-namespace CoolGameClub.Assets.Scripts.Map
+namespace CoolGameClub.Map
 {
     public class DanceFloorManager : Singleton<DanceFloorManager>
     {
-        
+
         [SerializeField] private DanceFloorTile _redTile;
         [SerializeField] private DanceFloorTile _greenTile;
         [SerializeField] private DanceFloorTile _blueTile;
