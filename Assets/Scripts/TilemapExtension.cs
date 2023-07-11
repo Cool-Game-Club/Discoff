@@ -39,4 +39,15 @@ public static class TilemapExtension {
 
         return positions;
     }
+
+    public static Dictionary<Vector3Int, TileBase> GetTileDict(this Tilemap tilemap) {
+        Dictionary<Vector3Int, TileBase> dict = new();
+        foreach (Vector3Int pos in tilemap.cellBounds.allPositionsWithin) {
+            TileBase tile = tilemap.GetTile(pos);
+            if (tile != null) {
+                dict.Add(pos, tile);
+            }
+        }
+        return dict;
+    }
 }

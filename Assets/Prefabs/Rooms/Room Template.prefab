@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4246618553096576581}
   - component: {fileID: 1074185010912312537}
   m_Layer: 6
-  m_Name: POI
+  m_Name: POI Tilemap
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -231,7 +231,7 @@ GameObject:
   - component: {fileID: 4619919035707826388}
   - component: {fileID: 9196595903158922583}
   m_Layer: 0
-  m_Name: Extras
+  m_Name: Extras Tilemap
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -351,7 +351,7 @@ GameObject:
   - component: {fileID: 471182998021221463}
   - component: {fileID: 6820915051839477096}
   m_Layer: 0
-  m_Name: Room
+  m_Name: Room Tilemap
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -7,7 +7,7 @@ using UnityEngine.Tilemaps;
 public class POITile : Tile
 {
     [SerializeField] private POIType _type;
-    public POIType Type { get { return _type; } private set { _type = value; } }
+    public POIType Type { get { return _type; } }
 
     public enum POIType {
         Bar,

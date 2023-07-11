@@ -10,6 +10,10 @@ public class Room : MonoBehaviour
     [SerializeField] private Tilemap _POITilemap;
     [SerializeField] private Tilemap _ExtrasTilemap;
 
+    public Tilemap RoomTileMap { get { return _RoomTilemap; } }
+    public Tilemap POITilemap { get { return _POITilemap; } }
+    public Tilemap ExtrasTilemap { get { return _ExtrasTilemap; } }
+
     [SerializeField] private List<Vector3Int> _doorCellPos = new();
     [SerializeField] private List<Vector3Int> _enemySpawnCellPos = new();
     [SerializeField] private Vector3Int _barCellPos;
@@ -21,6 +25,10 @@ public class Room : MonoBehaviour
         InitDanceFloor();
         FindPOITiles();
         CreateBar();
+    }
+
+    public Dictionary<Vector3Int, TileBase> GetRoomTiles() {
+        return _RoomTilemap.GetTileDict();
     }
 
     private void InitDanceFloor() {
