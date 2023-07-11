@@ -7,9 +7,11 @@ namespace CoolGameClub.Map
 {
     public class LevelManager : Singleton<LevelManager>
     {
-        [SerializeField] private Tilemap _levelTilemap;
+        [SerializeField] private Tilemap _levelRoomTilemap;
 
-        private List<Room> _roomSelection;
+        private Dictionary<Vector3Int, TileBase> _levelRoomTiles = new();
+
+        private List<Room> _choosableRooms;
 
         [Header("Prefabs")]
         [SerializeField] private Room _spawnRoom;
@@ -17,14 +19,23 @@ namespace CoolGameClub.Map
         [SerializeField] private Room _VerticalCorridor;
 
         public void Start() {
-            _roomSelection = Resources.LoadAll<Room>("Rooms").ToList();
+            _choosableRooms = Resources.LoadAll<Room>("Rooms").ToList();
 
-            LoadRoom(_spawnRoom, Vector3Int.zero, Direction.Up);
+            LoadRoom(_spawnRoom, Vector3Int.zero, Vector3Int.zero);
+            LoadRoom(_spawnRoom, Vector3Int.zero, new Vector3Int(-9, 0, 0));
         }
 
-        private void LoadRoom(Room room, Vector3Int origin, Direction dir) {
-            Dictionary<Vector3Int, TileBase> roomTiles = room.GetRoomTiles();
-            //Dictionary<Vector3Int, TileBase> POITiles = room.GetPOITiles();
+        private void LoadRoom(Room room, Vector3Int roomOrigin, Vector3Int levelPos) {
+            Vector3Int offset = levelPos - roomOrigin;
+
+            foreach (KeyValuePair<Vector3Int, TileBase> pair in room.GetRoomTiles()) {
+                SetTileInLevel(pair.Key + offset, pair.Value);
+            }
+        }
+
+        private void SetTileInLevel(Vector3Int pos, TileBase tile) {
+            _levelRoomTiles[pos] = tile;
+            _levelRoomTilemap.SetTile(pos, tile);
         }
 
         private struct RoomNode
