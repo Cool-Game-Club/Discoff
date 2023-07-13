@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7d57302d5368dd34d94ba5630835bf23, type: 3}
-  m_Name: POI Enemy Spawn
+  m_Name: Door Right Marker
   m_EditorClassIdentifier: 
-  m_Sprite: {fileID: -1077212718, guid: 3b57d9f3a7fe8b448b05792a69ba08c9, type: 3}
+  m_Sprite: {fileID: 1627273107, guid: 3b57d9f3a7fe8b448b05792a69ba08c9, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Transform:
     e00: 1
@@ -34,4 +34,4 @@ MonoBehaviour:
   m_InstancedGameObject: {fileID: 0}
   m_Flags: 1
   m_ColliderType: 1
-  _type: 1
+  _type: 3

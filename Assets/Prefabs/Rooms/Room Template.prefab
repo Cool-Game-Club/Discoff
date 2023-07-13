@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4246618553096576581}
   - component: {fileID: 1074185010912312537}
   m_Layer: 6
-  m_Name: POI Tilemap
+  m_Name: Marker Tilemap
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -213,7 +213,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _RoomTilemap: {fileID: 471182998021221463}
-  _POITilemap: {fileID: 4246618553096576581}
+  _MarkerTilemap: {fileID: 0}
   _ExtrasTilemap: {fileID: 4619919035707826388}
   _doorCellPos: []
   _enemySpawnCellPos: []

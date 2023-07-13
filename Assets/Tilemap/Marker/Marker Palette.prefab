@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3520918844044021800}
   - component: {fileID: 4447851981040965930}
   m_Layer: 0
-  m_Name: POI Palette
+  m_Name: Marker Palette
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

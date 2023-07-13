@@ -3,13 +3,13 @@ using UnityEngine.Tilemaps;
 
 namespace CoolGameClub.Map
 {
-    [CreateAssetMenu(menuName = "2D/Tiles/POI")]
-    public class POITile : Tile
+    [CreateAssetMenu(menuName = "2D/Tiles/Marker")]
+    public class MarkerTile : Tile
     {
-        [SerializeField] private POIType _type;
-        public POIType Type => _type;
+        [SerializeField] private MarkerType _type;
+        public MarkerType Type => _type;
 
-        public enum POIType
+        public enum MarkerType
         {
             Bar,
             EnemySpawn,

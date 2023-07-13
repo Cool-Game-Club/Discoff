@@ -136,7 +136,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: POI_0
+      name: Markers_0
       rect:
         serializedVersion: 2
         x: 0
@@ -150,14 +150,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 24ea59aacd731084a9674d7c8c88b576
-      internalID: 213353100
+      spriteID: 328fec5150ca0f04c844e395f4a16e3e
+      internalID: 1641481617
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: POI_1
+      name: Markers_1
       rect:
         serializedVersion: 2
         x: 32
@@ -171,14 +171,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 906dacb999228ef46b0c99d7eee8d935
-      internalID: -508646484
+      spriteID: 399b2d36a6b89994c9c02d502b671195
+      internalID: 1627273107
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: POI_2
+      name: Markers_2
       rect:
         serializedVersion: 2
         x: 64
@@ -192,14 +192,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 03d845db957877a4d9c73ff0be092782
-      internalID: -608710781
+      spriteID: fcbc149193ceb4448942c6d61087ec36
+      internalID: 1986349411
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: POI_3
+      name: Markers_3
       rect:
         serializedVersion: 2
         x: 96
@@ -213,14 +213,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2aa055d29bcb8f047b8db8287d44f29f
-      internalID: 1920195463
+      spriteID: cd7a217ddb91f8d47a80ebf21e9a730f
+      internalID: 1370300371
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: POI_4
+      name: Markers_4
       rect:
         serializedVersion: 2
         x: 128
@@ -234,14 +234,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0cd27b7fbef686940bc015c44cc29e66
-      internalID: -667297833
+      spriteID: e80889cca82892d4c8756fb7112c87f0
+      internalID: 2119558161
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: POI_5
+      name: Markers_5
       rect:
         serializedVersion: 2
         x: 160
@@ -255,8 +255,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 62f33dc80819d9a40b6e94d9c330a898
-      internalID: -1077212718
+      spriteID: e85cba5844bc6054ea0fe39826acc000
+      internalID: -1024095370
       vertices: []
       indices: 
       edges: []
@@ -272,12 +272,12 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      POI_0: 213353100
-      POI_1: -508646484
-      POI_2: -608710781
-      POI_3: 1920195463
-      POI_4: -667297833
-      POI_5: -1077212718
+      Markers_0: 1641481617
+      Markers_1: 1627273107
+      Markers_2: 1986349411
+      Markers_3: 1370300371
+      Markers_4: 2119558161
+      Markers_5: -1024095370
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

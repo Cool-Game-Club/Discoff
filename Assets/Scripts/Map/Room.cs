@@ -8,11 +8,11 @@ namespace CoolGameClub.Map
     public class Room : MonoBehaviour
     {
         [SerializeField] private Tilemap _RoomTilemap;
-        [SerializeField] private Tilemap _POITilemap;
+        [SerializeField] private Tilemap _MarkerTilemap;
         [SerializeField] private Tilemap _ExtrasTilemap;
 
         public Tilemap RoomTileMap => _RoomTilemap;
-        public Tilemap POITilemap => _POITilemap;
+        public Tilemap MarkerTilemap => _MarkerTilemap;
         public Tilemap ExtrasTilemap => _ExtrasTilemap;
 
         [SerializeField] private List<Vector3Int> _doorCellPos = new();
@@ -24,7 +24,7 @@ namespace CoolGameClub.Map
 
         private void Start() {
             InitDanceFloor();
-            FindPOITiles();
+            FindMarkerTiles();
             CreateBar();
         }
 
@@ -38,37 +38,37 @@ namespace CoolGameClub.Map
             }
         }
 
-        private void FindPOITiles() {
+        private void FindMarkerTiles() {
             // Compress the bounds of the tilemap to prevent looping through unassigned tiles
-            _POITilemap.CompressBounds();
+            _MarkerTilemap.CompressBounds();
 
-            // Loop through every tile and populate POITiles fields
-            for (int x = _POITilemap.cellBounds.min.x; x < _POITilemap.cellBounds.max.x; x++) {
-                for (int y = _POITilemap.cellBounds.min.y; y < _POITilemap.cellBounds.max.y; y++) {
-                    for (int z = _POITilemap.cellBounds.min.z; z < _POITilemap.cellBounds.max.z; z++) {
+            // Loop through every tile and populate MarkerTiles fields
+            for (int x = _MarkerTilemap.cellBounds.min.x; x < _MarkerTilemap.cellBounds.max.x; x++) {
+                for (int y = _MarkerTilemap.cellBounds.min.y; y < _MarkerTilemap.cellBounds.max.y; y++) {
+                    for (int z = _MarkerTilemap.cellBounds.min.z; z < _MarkerTilemap.cellBounds.max.z; z++) {
 
                         Vector3Int cellPos = new Vector3Int(x, y, z);
-                        TileBase tile = _POITilemap.GetTile(cellPos);
+                        TileBase tile = _MarkerTilemap.GetTile(cellPos);
 
                         if (tile == null) continue;
 
-                        if (tile is POITile POITile) {
-                            switch (POITile.Type) {
+                        if (tile is MarkerTile markerTile) {
+                            switch (markerTile.Type) {
 
                                 // TODO Fix error if there are multiple Bar tiles 
-                                case POITile.POIType.Bar:
+                                case MarkerTile.MarkerType.Bar:
                                     _barCellPos = cellPos;
                                     break;
 
-                                case POITile.POIType.EnemySpawn:
+                                case MarkerTile.MarkerType.EnemySpawn:
                                     _enemySpawnCellPos.Add(cellPos);
                                     break;
 
                                 // TODO Fix error if there are multiple Door tiles with the same direction
-                                case POITile.POIType.DoorLeft:
-                                case POITile.POIType.DoorRight:
-                                case POITile.POIType.DoorUp:
-                                case POITile.POIType.DoorDown:
+                                case MarkerTile.MarkerType.DoorLeft:
+                                case MarkerTile.MarkerType.DoorRight:
+                                case MarkerTile.MarkerType.DoorUp:
+                                case MarkerTile.MarkerType.DoorDown:
                                     _doorCellPos.Add(cellPos);
                                     break;
 
@@ -76,7 +76,7 @@ namespace CoolGameClub.Map
 
                             }
                         } else {
-                            Debug.LogWarning("Non-POI tile found in POI Tilemap");
+                            Debug.LogWarning("Non-Marker tile found in Marker Tilemap");
                         }
                     }
                 }
