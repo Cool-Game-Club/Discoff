@@ -6,7 +6,8 @@ using UnityEngine.Tilemaps;
 
 namespace CoolGameClub.Map
 {
-    public class LevelManager : Singleton<LevelManager> {
+    public class LevelManager : Singleton<LevelManager>
+    {
         [SerializeField] private Tilemap _levelRoomTilemap;
 
         private Dictionary<Vector3Int, TileBase> _levelRoomTiles = new();
@@ -14,7 +15,7 @@ namespace CoolGameClub.Map
         private List<Room> _choosableRooms;
 
         [Header("Room Prefabs")]
-        
+
         [Tooltip("The first room on each level")]
         [SerializeField] private Room _spawnRoom;
 
@@ -41,12 +42,41 @@ namespace CoolGameClub.Map
             LoadRoom(_spawnRoom, Vector3Int.zero, new Vector3Int(-9, 0, 0));
         }
 
+        /// <summary>
+        /// Loads a room to the Level tilemap at the given position from the given room origin.
+        /// </summary>
+        /// <param name="room">The room to load.</param>
+        /// <param name="roomOrigin">The room position to originate the loading from.</param>
+        /// <param name="levelPos">The level position to load to.</param>
         private void LoadRoom(Room room, Vector3Int roomOrigin, Vector3Int levelPos) {
-            Vector3Int offset = levelPos - roomOrigin;
+            LoadRoom(room, roomOrigin, levelPos, false);
+        }
 
-            foreach (KeyValuePair<Vector3Int, TileBase> pair in room.GetRoomTiles()) {
-                SetTileInLevel(pair.Key + offset, pair.Value);
+        /// <summary>
+        /// Attempts to load a room to the Level tilemap at the given position from the given room origin.
+        /// </summary>
+        /// <param name="room">The room to load.</param>
+        /// <param name="roomOrigin">The room position to originate the loading from.</param>
+        /// <param name="levelPos">The level position to load to.</param>
+        /// <param name="preventClipping">Whether clipping should be prevented.</param>
+        /// <returns>Whether the room was succesfully loaded.</returns>
+        private bool LoadRoom(Room room, Vector3Int roomOrigin, Vector3Int levelPos, bool preventClipping) {
+            Dictionary<Vector3Int, TileBase> roomDict = room.GetRoomTiles();
+
+            // If clipping should be prevented, check whether any of the positions are already occupied
+            if (preventClipping) {
+                foreach (KeyValuePair<Vector3Int, TileBase> pair in roomDict) {
+                    if (_levelRoomTiles.ContainsKey(pair.Key + levelPos - roomOrigin)) {
+                        return false;
+                    }
+                }
             }
+
+            foreach (KeyValuePair<Vector3Int, TileBase> pair in roomDict) {
+                SetTileInLevel(pair.Key + levelPos - roomOrigin, pair.Value);
+            }
+
+            return true;
         }
 
         private void SetTileInLevel(Vector3Int pos, TileBase tile) {
