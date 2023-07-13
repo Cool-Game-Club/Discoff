@@ -154,8 +154,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _levelRoomTilemap: {fileID: 1151714662}
   _spawnRoom: {fileID: 3900352652118143306, guid: 0a66087d03afdc4408297dd2fc909b29, type: 3}
-  _HorizontalCorridor: {fileID: 1890762529240751677, guid: 47c15cc2262234d418d1d646e06cda32, type: 3}
-  _VerticalCorridor: {fileID: 3747339760222601312, guid: 94e1650fb7e0dad499ae21bf1be00e30, type: 3}
+  _HorizontalConnector: {fileID: 1890762529240751677, guid: 47c15cc2262234d418d1d646e06cda32, type: 3}
+  _VerticalConnector: {fileID: 3747339760222601312, guid: 94e1650fb7e0dad499ae21bf1be00e30, type: 3}
+  _blankTile: {fileID: 11400000, guid: 83ba273f110ccad419c3d8b1e0a94655, type: 2}
+  _redTile: {fileID: 11400000, guid: a5bf0305fdc092c439e10cd68e1a5e02, type: 2}
+  _greenTile: {fileID: 11400000, guid: 2c2d2a763a9e1384b83810cb17c4c686, type: 2}
+  _blueTile: {fileID: 11400000, guid: 67f915b9eb4102f49b58695eee086b98, type: 2}
+  _purpleTile: {fileID: 11400000, guid: 1b97489000d9fb94d8ecfe06781b3a0d, type: 2}
+  _barTile: {fileID: 11400000, guid: 41f9712799b9da94ea42adebef5805df, type: 2}
 --- !u!4 &56070405
 Transform:
   m_ObjectHideFlags: 0
@@ -169,7 +175,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &92548391
 GameObject:
@@ -214,7 +220,7 @@ Transform:
   m_Children:
   - {fileID: 1151714660}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &519420028
 GameObject:
@@ -463,54 +469,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1090848486
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1090848488}
-  - component: {fileID: 1090848487}
-  m_Layer: 0
-  m_Name: Dance Floor Manager
-  m_TagString: DanceFloorManager
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1090848487
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1090848486}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1e5e3f81818388f40bbdc17a8af712cb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _redTile: {fileID: 11400000, guid: a5bf0305fdc092c439e10cd68e1a5e02, type: 2}
-  _greenTile: {fileID: 11400000, guid: 2c2d2a763a9e1384b83810cb17c4c686, type: 2}
-  _blueTile: {fileID: 11400000, guid: 67f915b9eb4102f49b58695eee086b98, type: 2}
-  _purpleTile: {fileID: 11400000, guid: 1b97489000d9fb94d8ecfe06781b3a0d, type: 2}
---- !u!4 &1090848488
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1090848486}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1151714659
 GameObject:

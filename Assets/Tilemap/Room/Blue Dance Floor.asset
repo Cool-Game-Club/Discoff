@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e7f28bc958f8f3f4b8c8c82ef74ae5fe, type: 3}
-  m_Name: Blue Dance Floor Tile
+  m_Name: Blue Dance Floor
   m_EditorClassIdentifier: 
   m_Sprite: {fileID: -266412388, guid: 7b74e33aad5b1d84f8ef721dc6221e6c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

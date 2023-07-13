@@ -1,3 +1,4 @@
+using CoolGameClub.Core;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -5,18 +6,33 @@ using UnityEngine.Tilemaps;
 
 namespace CoolGameClub.Map
 {
-    public class LevelManager : Singleton<LevelManager>
-    {
+    public class LevelManager : Singleton<LevelManager> {
         [SerializeField] private Tilemap _levelRoomTilemap;
 
         private Dictionary<Vector3Int, TileBase> _levelRoomTiles = new();
 
         private List<Room> _choosableRooms;
 
-        [Header("Prefabs")]
+        [Header("Room Prefabs")]
+        
+        [Tooltip("The first room on each level")]
         [SerializeField] private Room _spawnRoom;
-        [SerializeField] private Room _HorizontalCorridor;
-        [SerializeField] private Room _VerticalCorridor;
+
+        [Tooltip("Will be loaded between any horizontally-connecting rooms")]
+        [SerializeField] private Room _HorizontalConnector;
+
+        [Tooltip("Will be loaded between any vertically-connecting rooms")]
+        [SerializeField] private Room _VerticalConnector;
+
+        [Header("Dance Floor")]
+        [SerializeField] private Tile _blankTile;
+        [SerializeField] private DanceFloorTile _redTile;
+        [SerializeField] private DanceFloorTile _greenTile;
+        [SerializeField] private DanceFloorTile _blueTile;
+        [SerializeField] private DanceFloorTile _purpleTile;
+
+        [Header("Extras")]
+        [SerializeField] private Tile _barTile;
 
         public void Start() {
             _choosableRooms = Resources.LoadAll<Room>("Rooms").ToList();
@@ -38,17 +54,14 @@ namespace CoolGameClub.Map
             _levelRoomTilemap.SetTile(pos, tile);
         }
 
-        private struct RoomNode
-        {
-            public Room Room;
-
-            public Room RoomLeft;
-            public Room RoomRight;
-            public Room RoomUp;
-            public Room RoomDown;
+        public DanceFloorTile GetDanceFloorTile(Colors.Type type) {
+            return type switch {
+                Colors.Type.Red => _redTile,
+                Colors.Type.Green => _greenTile,
+                Colors.Type.Blue => _blueTile,
+                Colors.Type.Purple => _purpleTile,
+                _ => _redTile,
+            };
         }
     }
-
-
-    enum Direction { Left, Right, Up, Down }
 }
