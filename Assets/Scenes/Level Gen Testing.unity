@@ -153,9 +153,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _levelRoomTilemap: {fileID: 1151714662}
+  _amountOfRooms: 1
   _spawnRoom: {fileID: 3900352652118143306, guid: 0a66087d03afdc4408297dd2fc909b29, type: 3}
-  _HorizontalConnector: {fileID: 1890762529240751677, guid: 47c15cc2262234d418d1d646e06cda32, type: 3}
-  _VerticalConnector: {fileID: 3747339760222601312, guid: 94e1650fb7e0dad499ae21bf1be00e30, type: 3}
+  _horizontalConnector: {fileID: 0}
+  _verticalConnector: {fileID: 0}
   _blankTile: {fileID: 11400000, guid: 83ba273f110ccad419c3d8b1e0a94655, type: 2}
   _redTile: {fileID: 11400000, guid: a5bf0305fdc092c439e10cd68e1a5e02, type: 2}
   _greenTile: {fileID: 11400000, guid: 2c2d2a763a9e1384b83810cb17c4c686, type: 2}
@@ -352,7 +353,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.15, z: -10}
+  m_LocalPosition: {x: 0, y: 0, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

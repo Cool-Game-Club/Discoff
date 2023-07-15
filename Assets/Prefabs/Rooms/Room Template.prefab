@@ -149,9 +149,9 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 6986541285287259577}
   - {fileID: 5791315619009101245}
   - {fileID: 8438991038482670237}
+  - {fileID: 6986541285287259577}
   m_Father: {fileID: 1383128376977930151}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -212,13 +212,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48d6fda8f52bb1148b20baa5aad7c227, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _RoomTilemap: {fileID: 471182998021221463}
-  _MarkerTilemap: {fileID: 0}
-  _ExtrasTilemap: {fileID: 4619919035707826388}
-  _doorCellPos: []
-  _enemySpawnCellPos: []
-  _barCellPos: {x: 0, y: 0, z: 0}
-  _barTile: {fileID: 11400000, guid: 41f9712799b9da94ea42adebef5805df, type: 2}
+  _roomTilemap: {fileID: 471182998021221463}
+  _markerTilemap: {fileID: 4246618553096576581}
+  _extrasTilemap: {fileID: 4619919035707826388}
 --- !u!1 &6150087369754458679
 GameObject:
   m_ObjectHideFlags: 0
