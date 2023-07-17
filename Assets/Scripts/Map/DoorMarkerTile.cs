@@ -22,18 +22,20 @@ namespace CoolGameClub
             get => _direction switch {
                 DoorDirection.Left => new Vector3Int(-1, 0, 0),
                 DoorDirection.Right => new Vector3Int(1, 0, 0),
-                DoorDirection.Up => new Vector3Int(0, -1, 0),
-                DoorDirection.Down => new Vector3Int(0, 1, 0),
+                DoorDirection.Up => new Vector3Int(0, 1, 0),
+                DoorDirection.Down => new Vector3Int(0, 0, 0),
                 _ => Vector3Int.zero
             };
         }
 
-        public enum DoorDirection
-        {
-            Left,
-            Right,
-            Up,
-            Down,
-        }
+    }
+
+    public enum DoorDirection
+    {
+        None,
+        Left,
+        Right,
+        Up,
+        Down,
     }
 }

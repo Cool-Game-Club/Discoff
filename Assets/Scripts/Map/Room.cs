@@ -6,42 +6,26 @@ namespace CoolGameClub.Map
 {
     public class Room : MonoBehaviour
     {
-        [SerializeField] private Tilemap _roomTilemap;
-        [SerializeField] private Tilemap _markerTilemap;
-        [SerializeField] private Tilemap _extrasTilemap;
+        [SerializeField] private List<TilemapLayer> _tilemapLayers;
+        private TilemapController _tilemapController;
 
-        public Dictionary<Vector3Int, TileBase> GetRoomTiles() {
-            return _roomTilemap.GetTileDict();
+        public void Init() {
+            _tilemapController = new(_tilemapLayers);
         }
 
-        public Vector3Int GetDoorPos(DoorMarkerTile.DoorDirection direction) {
-            foreach (KeyValuePair<Vector3Int, DoorMarkerTile> pair in _markerTilemap.GetTileDict<DoorMarkerTile>()) {
-                if (pair.Value.Direction == direction) {
-                    return pair.Key;
-                }
+        public List<TileInfo<TileBase>> GetEnvironmentTiles() {
+            return _tilemapController.GetTiles((int)LevelLayers.Environment);
+        }
+
+        public List<TileInfo<DoorMarkerTile>> GetDoorMarkerTiles() {
+            return _tilemapController.GetTiles<DoorMarkerTile>((int)LevelLayers.Markers);
+        }
+
+        public TileInfo<DoorMarkerTile> GetDoorMarkerTile(DoorDirection doorDirection) {
+            foreach (TileInfo<DoorMarkerTile> doorMarkerTile in _tilemapController.GetTiles<DoorMarkerTile>((int)LevelLayers.Markers)) {
+                if (doorMarkerTile.Tile.Direction == doorDirection) return doorMarkerTile;
             }
-            Debug.LogError("Door with corresponding direction not found.");
-            return Vector3Int.zero;
+            return null;
         }
-
-        public Dictionary<Vector3Int, DoorMarkerTile> GetDoorTiles() {
-            return _markerTilemap.GetTileDict<DoorMarkerTile>();
-        }
-
-        /*public Dictionary<Vector3Int, MarkerTile> GetDoorTiles() {
-            Dictionary<Vector3Int, MarkerTile> doors = new();
-            foreach (KeyValuePair<Vector3Int, MarkerTile> pair in _markerTilemap.GetTileDict<MarkerTile>()) {
-                switch (pair.Value.Type) {
-                    case MarkerTile.MarkerType.DoorLeft:
-                    case MarkerTile.MarkerType.DoorRight:
-                    case MarkerTile.MarkerType.DoorUp:
-                    case MarkerTile.MarkerType.DoorDown:
-                        doors.Add(pair.Key, pair.Value);
-                        break;
-                    default: break;
-                }
-            }
-            return doors;
-        }*/
     }
 }
