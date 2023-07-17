@@ -9,6 +9,8 @@ namespace CoolGameClub.Map
     public class LevelManager : Singleton<LevelManager>
     {
         [Header("Level")]
+        [Range(1, 20)]
+        [SerializeField] private int _numberOfRooms;
         [SerializeField] private List<TilemapLayer> _tilemapLayers;
 
         [Header("Room Prefabs")]
@@ -26,7 +28,6 @@ namespace CoolGameClub.Map
         [SerializeField] private Room _doorCoverDown;
 
         [Header("Dance Floor")]
-        [SerializeField] private Tile _blankTile;
         [SerializeField] private DanceFloorTile _redTile;
         [SerializeField] private DanceFloorTile _greenTile;
         [SerializeField] private DanceFloorTile _blueTile;
@@ -46,6 +47,7 @@ namespace CoolGameClub.Map
         public void Start() {
             _tilemapController = new(_tilemapLayers);
 
+            // Eww
             _spawnRoom.Init();
             _horizontalConnector.Init();
             _verticalConnector.Init();
@@ -53,6 +55,7 @@ namespace CoolGameClub.Map
             _doorCoverRight.Init();
             _doorCoverUp.Init();
             _doorCoverDown.Init();
+
             _choosableRooms = Resources.LoadAll<Room>("Rooms").ToList();
             foreach (Room room in _choosableRooms) {
                 room.Init();
@@ -61,26 +64,19 @@ namespace CoolGameClub.Map
             LoadRoom(_spawnRoom, Vector3Int.zero, Vector3Int.zero);
             AddDoorsToUnused(_spawnRoom, Vector3Int.zero, Vector3Int.zero);
 
-            AddRandomRoom(_choosableRooms, _unusedDoors);
-            AddRandomRoom(_choosableRooms, _unusedDoors);
-            AddRandomRoom(_choosableRooms, _unusedDoors);
-            AddRandomRoom(_choosableRooms, _unusedDoors);
-            AddRandomRoom(_choosableRooms, _unusedDoors);
-            AddRandomRoom(_choosableRooms, _unusedDoors);
-            AddRandomRoom(_choosableRooms, _unusedDoors);
-            AddRandomRoom(_choosableRooms, _unusedDoors);
-            AddRandomRoom(_choosableRooms, _unusedDoors);
-            AddRandomRoom(_choosableRooms, _unusedDoors);
-            AddRandomRoom(_choosableRooms, _unusedDoors);
+            for (int i = 0; i < _numberOfRooms; i++) {
+                AddRandomRoom(_choosableRooms, _unusedDoors);
+            }
 
             CoverUnusedDoors();
+            ReplaceBlankDanceFloor();
         }
 
+        // If I have to touch this again I will throw up
         private void AddRandomRoom(List<Room> possibleRooms, List<TileInfo<DoorMarkerTile>> possibleDoors) {
 
-
             if (possibleRooms.Count == 0 || possibleDoors.Count == 0) {
-                Debug.LogError("Darn");
+                Debug.LogError("https://www.youtube.com/watch?v=f8mL0_4GeV0");
             }
 
             List<Room> possibleRoomCopy = new(possibleRooms);
@@ -147,29 +143,6 @@ namespace CoolGameClub.Map
             AddDoorsToUnused(randomRoom, randomRoomRoomOrigin, randomRoomLevelPos, randomDoor.Tile.OppositeDirection);
         }
 
-        private void AddDoorsToUnused(Room room, Vector3Int roomOrigin, Vector3Int levelPos, DoorDirection directionException = DoorDirection.None) {
-            foreach (TileInfo<DoorMarkerTile> doorMarkerTile in room.GetDoorMarkerTiles()) {
-                if (doorMarkerTile.Tile.Direction != directionException) {
-                    TileInfo<DoorMarkerTile> door = new(doorMarkerTile);
-                    door.SetPos(door.Pos + levelPos - roomOrigin);
-                    _unusedDoors.Add(door);
-                }
-            }
-        }
-
-        private void CoverUnusedDoors() {
-            foreach (TileInfo<DoorMarkerTile> tileInfo in _unusedDoors) {
-                Room cover = tileInfo.Tile.Direction switch {
-                    DoorDirection.Left => _doorCoverLeft,
-                    DoorDirection.Right => _doorCoverRight,
-                    DoorDirection.Up => _doorCoverUp,
-                    DoorDirection.Down => _doorCoverDown,
-                    _ => null
-                };
-
-                LoadRoom(cover, cover.GetDoorMarkerTile(tileInfo.Tile.Direction).Pos, tileInfo.Pos);
-            }
-        }
 
         /// <summary>
         /// Loads a room to the Level tilemap at the given position from the given room origin.
@@ -197,6 +170,42 @@ namespace CoolGameClub.Map
                 }
             }
             return true;
+        }
+
+        private void AddDoorsToUnused(Room room, Vector3Int roomOrigin, Vector3Int levelPos, DoorDirection directionException = DoorDirection.None) {
+            foreach (TileInfo<DoorMarkerTile> doorMarkerTile in room.GetDoorMarkerTiles()) {
+                if (doorMarkerTile.Tile.Direction != directionException) {
+                    TileInfo<DoorMarkerTile> door = new(doorMarkerTile);
+                    door.SetPos(door.Pos + levelPos - roomOrigin);
+                    _unusedDoors.Add(door);
+                }
+            }
+        }
+
+        private void CoverUnusedDoors() {
+            foreach (TileInfo<DoorMarkerTile> tileInfo in _unusedDoors) {
+                Room cover = tileInfo.Tile.Direction switch {
+                    DoorDirection.Left => _doorCoverLeft,
+                    DoorDirection.Right => _doorCoverRight,
+                    DoorDirection.Up => _doorCoverUp,
+                    DoorDirection.Down => _doorCoverDown,
+                    _ => null
+                };
+                LoadRoom(cover, cover.GetDoorMarkerTile(tileInfo.Tile.Direction).Pos, tileInfo.Pos);
+            }
+        }
+
+        private void ReplaceBlankDanceFloor() {
+            foreach (TileInfo<BlankDanceFloorTile> tileInfo in _tilemapController.GetTiles<BlankDanceFloorTile>()) {
+                DanceFloorTile randomTile = Colors.RandomColor() switch {
+                    Colors.Color.Red => _redTile,
+                    Colors.Color.Green => _greenTile,
+                    Colors.Color.Blue => _blueTile,
+                    Colors.Color.Purple => _purpleTile,
+                    _ => null,
+                };
+                _tilemapController.SetTile(tileInfo.Pos, randomTile);
+            }
         }
 
         private DanceFloorTile GetDanceFloorTile(Colors.Color type) {
