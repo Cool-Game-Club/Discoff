@@ -97,6 +97,8 @@ namespace CoolGameClub
 
     public class TileInfo : TileInfo<TileBase>
     {
+        public TileInfo(TileInfo<TileBase> tileInfo) : base(tileInfo) { }
+
         public TileInfo(Vector3Int pos, TileBase tile) : base(pos, tile) { }
     }
 
@@ -107,8 +109,6 @@ namespace CoolGameClub
 
         private T _tile;
         public T Tile => _tile;
-
-        public void SetPos(Vector3Int pos) { _pos = pos; }
 
         public TileInfo(TileInfo<T> tileInfo) {
             _pos = tileInfo._pos;

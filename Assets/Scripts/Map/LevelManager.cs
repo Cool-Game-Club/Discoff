@@ -9,7 +9,7 @@ namespace CoolGameClub.Map
     public class LevelManager : Singleton<LevelManager>
     {
         [Header("Level")]
-        [Range(1, 20)]
+        //[Range(1, 20)]
         [SerializeField] private int _numberOfRooms;
         [SerializeField] private List<TilemapLayer> _tilemapLayers;
 
@@ -175,9 +175,7 @@ namespace CoolGameClub.Map
         private void AddDoorsToUnused(Room room, Vector3Int roomOrigin, Vector3Int levelPos, DoorDirection directionException = DoorDirection.None) {
             foreach (TileInfo<DoorMarkerTile> doorMarkerTile in room.GetDoorMarkerTiles()) {
                 if (doorMarkerTile.Tile.Direction != directionException) {
-                    TileInfo<DoorMarkerTile> door = new(doorMarkerTile);
-                    door.SetPos(door.Pos + levelPos - roomOrigin);
-                    _unusedDoors.Add(door);
+                    _unusedDoors.Add(new TileInfo<DoorMarkerTile>(doorMarkerTile.Pos + levelPos - roomOrigin, doorMarkerTile.Tile));
                 }
             }
         }
