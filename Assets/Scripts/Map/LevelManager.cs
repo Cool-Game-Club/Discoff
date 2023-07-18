@@ -20,10 +20,10 @@ namespace CoolGameClub.Map
         [SerializeField] private Room _spawnRoom;
 
         [Tooltip("Will be loaded between any horizontally-connecting rooms")]
-        [SerializeField] private Room _HorizontalConnector;
+        [SerializeField] private Room _horizontalConnector;
 
         [Tooltip("Will be loaded between any vertically-connecting rooms")]
-        [SerializeField] private Room _VerticalConnector;
+        [SerializeField] private Room _verticalConnector;
 
         [Header("Dance Floor")]
         [SerializeField] private Tile _blankTile;

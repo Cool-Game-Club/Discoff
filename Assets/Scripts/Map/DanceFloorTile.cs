@@ -7,6 +7,6 @@ namespace CoolGameClub.Map
     [CreateAssetMenu(menuName = "2D/Tiles/Dance Floor")]
     public class DanceFloorTile : Tile
     {
-        [SerializeField] private Colors.Type type;
+        [SerializeField] private Colors.Type _type;
     }
 }
