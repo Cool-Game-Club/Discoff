@@ -6,16 +6,26 @@ namespace CoolGameClub.Map
 {
     public class Room : MonoBehaviour
     {
-        [SerializeField] private Tilemap _roomTilemap;
-        [SerializeField] private Tilemap _markerTilemap;
-        [SerializeField] private Tilemap _extrasTilemap;
+        [SerializeField] private List<TilemapLayer> _tilemapLayers;
+        private TilemapController _tilemapController;
 
-        public Tilemap RoomTileMap => _roomTilemap;
-        public Tilemap MarkerTilemap => _markerTilemap;
-        public Tilemap ExtrasTilemap => _extrasTilemap;
+        public void Init() {
+            _tilemapController = new(_tilemapLayers);
+        }
 
-        public Dictionary<Vector3Int, TileBase> GetRoomTiles() {
-            return _roomTilemap.GetTileDict();
+        public List<TileInfo<TileBase>> GetEnvironmentTiles() {
+            return _tilemapController.GetTiles((int)LevelLayers.Environment);
+        }
+
+        public List<TileInfo<DoorMarkerTile>> GetDoorMarkerTiles() {
+            return _tilemapController.GetTiles<DoorMarkerTile>((int)LevelLayers.Markers);
+        }
+
+        public TileInfo<DoorMarkerTile> GetDoorMarkerTile(DoorDirection doorDirection) {
+            foreach (TileInfo<DoorMarkerTile> doorMarkerTile in _tilemapController.GetTiles<DoorMarkerTile>((int)LevelLayers.Markers)) {
+                if (doorMarkerTile.Tile.Direction == doorDirection) return doorMarkerTile;
+            }
+            return null;
         }
     }
 }
