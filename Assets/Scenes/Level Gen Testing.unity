@@ -152,7 +152,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a41e2a609c3f2284aa8f9e9117d01074, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _numberOfRooms: 66420
+  _numberOfRooms: 10
   _tilemapLayers:
   - Tilemap: {fileID: 1151714662}
   _spawnRoom: {fileID: 3900352652118143306, guid: 0a66087d03afdc4408297dd2fc909b29, type: 3}
