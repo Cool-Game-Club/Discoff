@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-namespace CoolGameClub.Movement
+namespace CoolGameClub.Player
 {
     public class PlayerInputManager : MonoBehaviour
     {

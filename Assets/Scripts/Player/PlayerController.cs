@@ -1,12 +1,12 @@
 using UnityEngine;
 
-namespace CoolGameClub.Movement
+namespace CoolGameClub.Player
 {
     public class PlayerController : MonoBehaviour
     {
         [Header("Player Speed")]
         [Tooltip("Max move speed of the character in m/s")]
-        [SerializeField] private float _maxMoveSpeed = 100f;
+        [SerializeField] private float _maxMoveSpeed = 7f;
 
         //private PlayerInput _playerInput;
         private PlayerInputManager _input;
@@ -21,7 +21,8 @@ namespace CoolGameClub.Movement
             Move();
         }
 
-        public void Move() {
+        private void Move() {
+            // Convert input direction to speed and make it so if there is no input then there is no speed
             float targetSpeed = (_input.MoveDirection == Vector2.zero) ? 0f : _maxMoveSpeed;
 
             // Find the change in position
