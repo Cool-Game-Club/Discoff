@@ -25,9 +25,9 @@ namespace CoolGameClub.Movement
             float targetSpeed = (_input.MoveDirection == Vector2.zero) ? 0f : _maxMoveSpeed;
 
             // Find the change in position
-            Vector3 moveChange = targetSpeed * Time.fixedDeltaTime * _input.MoveDirection.normalized;
+            Vector3 velocity = targetSpeed * Time.fixedDeltaTime * _input.MoveDirection.normalized;
 
-            _rigidbody.MovePosition(_rigidbody.transform.position + moveChange);
+            _rigidbody.MovePosition(_rigidbody.transform.position + velocity);
         }
     }
 }
