@@ -9,7 +9,7 @@ namespace CoolGameClub.Map
     public class LevelManager : Singleton<LevelManager>
     {
         [Header("Level")]
-        //[Range(1, 20)]
+        [Range(1, 100)]
         [SerializeField] private int _numberOfRooms;
         [SerializeField] private List<TilemapLayer> _tilemapLayers;
 
@@ -36,13 +36,11 @@ namespace CoolGameClub.Map
         [Header("Extras")]
         [SerializeField] private Tile _barTile;
 
-
         private List<Room> _pickableRooms;
 
         private List<TileInfo<DoorMarkerTile>> _pickableDoors = new();
 
         private TilemapController _tilemapController;
-
 
         public void Start() {
             _tilemapController = new(_tilemapLayers);
@@ -72,7 +70,6 @@ namespace CoolGameClub.Map
             ReplaceBlankDanceFloor();
         }
 
-        // If I have to touch this again I will throw up
         private void AddRandomRoom() {
 
             // Initialize the list of valid rooms to pick from
