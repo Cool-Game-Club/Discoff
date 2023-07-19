@@ -27,13 +27,17 @@ namespace CoolGameClub.Map
         [SerializeField] private Room _doorCoverUp;
         [SerializeField] private Room _doorCoverDown;
 
-        [Header("Dance Floor")]
+        [Header("Dance Floor Tiles")]
         [SerializeField] private DanceFloorTile _redTile;
         [SerializeField] private DanceFloorTile _greenTile;
         [SerializeField] private DanceFloorTile _blueTile;
         [SerializeField] private DanceFloorTile _purpleTile;
 
-        [Header("Extras")]
+        [Header("Wall tiles")]
+        [SerializeField] private TileBase _wallTile;
+        [SerializeField] private TileBase _roofTile;
+
+        [Header("Props")]
         [SerializeField] private Tile _barTile;
 
         private List<Room> _pickableRooms;
@@ -41,6 +45,8 @@ namespace CoolGameClub.Map
         private List<TileInfo<DoorMarkerTile>> _pickableDoors = new();
 
         private TilemapController _tilemapController;
+
+        private enum LevelLayer { Walls, Floor, Props, Triggers }
 
         public void Start() {
             _tilemapController = new(_tilemapLayers);
@@ -163,8 +169,9 @@ namespace CoolGameClub.Map
         /// <param name="roomOrigin">The room position to originate the loading from.</param>
         /// <param name="levelPos">The level position to load to.</param>
         private void LoadRoom(Room room, Vector3Int roomOrigin, Vector3Int levelPos) {
-            foreach (TileInfo<TileBase> tileInfo in room.GetEnvironmentTiles()) {
-                _tilemapController.SetTile(tileInfo.Pos + levelPos - roomOrigin, tileInfo.Tile, (int)LevelLayers.Environment);
+            foreach (TileInfo<TileBase> tileInfo in room.GetWallsAndFloorTiles()) {
+                LevelLayer layer = (tileInfo.Tile == _wallTile || tileInfo.Tile == _roofTile) ? LevelLayer.Walls : LevelLayer.Floor;
+                _tilemapController.SetTile(tileInfo.Pos + levelPos - roomOrigin, tileInfo.Tile, (int)layer);
             }
         }
 
@@ -176,8 +183,10 @@ namespace CoolGameClub.Map
         /// <param name="levelPos">The level position to load to.</param>
         /// <returns>Whether the room can be loaded the the position.</returns>
         private bool CanLoadRoom(Room room, Vector3Int roomOrigin, Vector3Int levelPos) {
-            foreach (TileInfo<TileBase> tileInfo in room.GetEnvironmentTiles()) {
-                if (_tilemapController.ContainsTile(tileInfo.Pos + levelPos - roomOrigin, (int)LevelLayers.Environment)) {
+            foreach (TileInfo<TileBase> tileInfo in room.GetWallsAndFloorTiles()) {
+                bool containsTileWalls = _tilemapController.ContainsTile(tileInfo.Pos + levelPos - roomOrigin, (int)LevelLayer.Walls);
+                bool containsTileFloor = _tilemapController.ContainsTile(tileInfo.Pos + levelPos - roomOrigin, (int)LevelLayer.Floor);
+                if (containsTileWalls || containsTileFloor) {
                     return false;
                 }
             }
@@ -186,7 +195,7 @@ namespace CoolGameClub.Map
 
         private void LoadBar(Room room, Vector3Int roomOrigin, Vector3Int levelPos) {
             TileInfo<MarkerTile> barMarkerTile = room.GetBarMarkerTile();
-            _tilemapController.SetTile(barMarkerTile.Pos + levelPos - roomOrigin, _barTile, (int)LevelLayers.Extras);
+            _tilemapController.SetTile(barMarkerTile.Pos + levelPos - roomOrigin, _barTile, (int)LevelLayer.Props);
         }
 
         private void AddDoorsToUnused(Room room, Vector3Int roomOrigin, Vector3Int levelPos, DoorDirection directionException = DoorDirection.None) {
@@ -211,7 +220,7 @@ namespace CoolGameClub.Map
         }
 
         private void ReplaceBlankDanceFloor() {
-            foreach (TileInfo<BlankDanceFloorTile> tileInfo in _tilemapController.GetTiles<BlankDanceFloorTile>()) {
+            foreach (TileInfo<BlankDanceFloorTile> tileInfo in _tilemapController.GetTiles<BlankDanceFloorTile>((int)LevelLayer.Floor)) {
                 DanceFloorTile randomTile = Colors.RandomColor() switch {
                     Colors.Color.Red => _redTile,
                     Colors.Color.Green => _greenTile,
@@ -219,20 +228,8 @@ namespace CoolGameClub.Map
                     Colors.Color.Purple => _purpleTile,
                     _ => null,
                 };
-                _tilemapController.SetTile(tileInfo.Pos, randomTile);
+                _tilemapController.SetTile(tileInfo.Pos, randomTile, (int)LevelLayer.Floor);
             }
         }
-
-        private DanceFloorTile GetDanceFloorTile(Colors.Color type) {
-            return type switch {
-                Colors.Color.Red => _redTile,
-                Colors.Color.Green => _greenTile,
-                Colors.Color.Blue => _blueTile,
-                Colors.Color.Purple => _purpleTile,
-                _ => _redTile,
-            };
-        }
     }
-
-    public enum LevelLayers { Environment, Markers, Extras }
 }
