@@ -23,7 +23,7 @@ namespace CoolGameClub
                 DoorDirection.Left => new Vector3Int(-1, 0, 0),
                 DoorDirection.Right => new Vector3Int(1, 0, 0),
                 DoorDirection.Up => new Vector3Int(0, 1, 0),
-                DoorDirection.Down => new Vector3Int(0, 0, 0),
+                DoorDirection.Down => new Vector3Int(0, -1, 0),
                 _ => Vector3Int.zero
             };
         }
