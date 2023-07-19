@@ -63,14 +63,14 @@ namespace CoolGameClub.Map
             AddDoorsToUnused(_spawnRoom, Vector3Int.zero, Vector3Int.zero);
 
             for (int i = 0; i < _numberOfRooms; i++) {
-                AddRandomRoom();
+                AddRandomRoom(i == _numberOfRooms - 1);
             }
 
             CoverUnusedDoors();
             ReplaceBlankDanceFloor();
         }
 
-        private void AddRandomRoom() {
+        private void AddRandomRoom(bool isBarRoom = false) {
 
             // Initialize the list of valid rooms to pick from
             // Rooms are removed from the list if they are deemed unvalid
@@ -141,6 +141,9 @@ namespace CoolGameClub.Map
                         // Add the doors from the random room to the global list of pickable doors, making sure to exclude the entrance
                         AddDoorsToUnused(randomRoom, randomRoomRoomOrigin, randomRoomLevelPos, randomDoor.Tile.OppositeDirection);
 
+                        // Load the bar if it is a bar room
+                        if (isBarRoom) LoadBar(randomRoom, randomRoomRoomOrigin, randomRoomLevelPos);
+
                         // Return out of the method to prevent more rooms spawning
                         return;
                     }
@@ -179,6 +182,11 @@ namespace CoolGameClub.Map
                 }
             }
             return true;
+        }
+
+        private void LoadBar(Room room, Vector3Int roomOrigin, Vector3Int levelPos) {
+            TileInfo<MarkerTile> barMarkerTile = room.GetBarMarkerTile();
+            _tilemapController.SetTile(barMarkerTile.Pos + levelPos - roomOrigin, _barTile, (int)LevelLayers.Extras);
         }
 
         private void AddDoorsToUnused(Room room, Vector3Int roomOrigin, Vector3Int levelPos, DoorDirection directionException = DoorDirection.None) {

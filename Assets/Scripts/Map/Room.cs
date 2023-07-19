@@ -27,5 +27,12 @@ namespace CoolGameClub.Map
             }
             return null;
         }
+
+        public TileInfo<MarkerTile> GetBarMarkerTile() {
+            foreach (TileInfo<MarkerTile> markerTile in _tilemapController.GetTiles<MarkerTile>((int)LevelLayers.Markers)) {
+                if (markerTile.Tile.Type == MarkerTile.MarkerType.Bar) return markerTile;
+            }
+            return null;
+        }
     }
 }
