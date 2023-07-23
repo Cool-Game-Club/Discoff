@@ -232,7 +232,7 @@ namespace CoolGameClub.Map
             }
         }
 
-        private Colors.Color? GetColorOfTile(Vector2 worldPos) {
+        public Colors.Color? GetColorOfTile(Vector2 worldPos) {
             Vector3Int pos = _tilemapController.WorldToCell(new Vector3(worldPos.x, worldPos.y, 0));
 
             if (!_tilemapController.ContainsTile(pos, (int)LevelLayer.Floor)) return null;
