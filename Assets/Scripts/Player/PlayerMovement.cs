@@ -1,26 +1,15 @@
-using System.Diagnostics;
-using System.Numerics;
 using UnityEngine;
-using Debug = UnityEngine.Debug;
-using Vector2 = UnityEngine.Vector2;
-using Vector3 = UnityEngine.Vector3;
 
 namespace CoolGameClub.Player
 {
-    public class PlayerScript : MonoBehaviour
+    public class PlayerMovement : MonoBehaviour
     {
         [Header("Player Speed")]
         [Tooltip("Max move speed of the character in m/s")]
         [SerializeField] private float _maxMoveSpeed = 7f;
 
-        [Header("Player Attacks")] 
-        [SerializeField] private float _attackSpeed = 1.0f;
-
         private PlayerInputManager _input;
         private Rigidbody2D _rigidbody;
-
-        // Initializing the "nextAttack" variable, which is a float to store the time spent between attacks
-        private float _nextAttack;
 
         void Start() {
             _input = FindAnyObjectByType<PlayerInputManager>();
@@ -29,7 +18,6 @@ namespace CoolGameClub.Player
 
         private void FixedUpdate() {
             Move();
-            Attack(-_input.AttackDirection.x, -_input.AttackDirection.y);
         }
 
         private void Move() {
@@ -41,16 +29,6 @@ namespace CoolGameClub.Player
 
             // Apply the movement changes
             _rigidbody.MovePosition(_rigidbody.transform.position + velocity);
-        }
-
-        private void Attack(float x, float y) {
-
-            if ((x == 0 && y == 0) || Time.time < _nextAttack)
-                return;
-
-            _nextAttack = Time.time + _attackSpeed;
-
-            Debug.Log("Attacking");
         }
     }
 }
