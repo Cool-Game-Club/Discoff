@@ -13,6 +13,8 @@ namespace CoolGameClub
             LoadTilemaps();
         }
 
+        public Vector3Int WorldToCell(Vector3 worldPosition, int layerIndex = 0) => _layers[layerIndex].Tilemap.WorldToCell(worldPosition);
+
         public void SetTile(Vector3Int pos, TileBase tile, int layerIndex = 0) {
             TilemapLayer layer = _layers[layerIndex];
             if (layer.TileDict.ContainsKey(pos)) {

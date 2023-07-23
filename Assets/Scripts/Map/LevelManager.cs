@@ -231,5 +231,15 @@ namespace CoolGameClub.Map
                 _tilemapController.SetTile(tileInfo.Pos, randomTile, (int)LevelLayer.Floor);
             }
         }
+
+        private Colors.Color? GetColorOfTile(Vector2 worldPos) {
+            Vector3Int pos = _tilemapController.WorldToCell(new Vector3(worldPos.x, worldPos.y, 0));
+
+            if (!_tilemapController.ContainsTile(pos, (int)LevelLayer.Floor)) return null;
+
+            if (_tilemapController.GetTile(pos, (int)LevelLayer.Floor) is DanceFloorTile danceFloorTile) return danceFloorTile.Color;
+
+            return null;
+        }
     }
 }
