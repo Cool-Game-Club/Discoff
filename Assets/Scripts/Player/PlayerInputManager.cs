@@ -3,7 +3,7 @@ using UnityEngine.InputSystem;
 
 namespace CoolGameClub.Player
 {
-    public class PlayerInputManager : MonoBehaviour
+    public class PlayerInputManager : Singleton<PlayerInputManager>
     {
         [Header("Player inputs directions:")]
         [SerializeField] private Vector2 _moveDirection;
