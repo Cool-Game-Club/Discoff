@@ -8,5 +8,6 @@ namespace CoolGameClub.Map
     public class DanceFloorTile : Tile
     {
         [SerializeField] private Colors.Color _color;
+        public Colors.Color Color => _color;
     }
 }

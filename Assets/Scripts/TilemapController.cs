@@ -4,24 +4,6 @@ using UnityEngine.Tilemaps;
 
 namespace CoolGameClub
 {
-    public static class TilemapExtension
-    {
-        public static Dictionary<Vector3Int, T> GetTileDict<T>(this Tilemap tilemap) {
-            Dictionary<Vector3Int, T> dict = new();
-            foreach (Vector3Int pos in tilemap.cellBounds.allPositionsWithin) {
-                TileBase tile = tilemap.GetTile(pos);
-                if (tile != null && tile is T tTile) {
-                    dict.Add(pos, tTile);
-                }
-            }
-            return dict;
-        }
-
-        public static Dictionary<Vector3Int, TileBase> GetTileDict(this Tilemap tilemap) {
-            return GetTileDict<TileBase>(tilemap);
-        }
-    }
-
     public class TilemapController
     {
         private List<TilemapLayer> _layers;
@@ -30,6 +12,8 @@ namespace CoolGameClub
             _layers = layers;
             LoadTilemaps();
         }
+
+        public Vector3Int WorldToCell(Vector3 worldPosition, int layerIndex = 0) => _layers[layerIndex].Tilemap.WorldToCell(worldPosition);
 
         public void SetTile(Vector3Int pos, TileBase tile, int layerIndex = 0) {
             TilemapLayer layer = _layers[layerIndex];
