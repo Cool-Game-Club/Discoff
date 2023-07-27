@@ -32,7 +32,6 @@ namespace CoolGameClub
 
     public enum DoorDirection
     {
-        None,
         Left,
         Right,
         Up,

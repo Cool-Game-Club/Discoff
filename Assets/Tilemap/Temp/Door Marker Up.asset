@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 14f241c362a688d4f9179a303eb36bf0, type: 3}
-  m_Name: Door Up Marker Tile
+  m_Name: Door Marker Up
   m_EditorClassIdentifier: 
-  m_Sprite: {fileID: 1370300371, guid: 3b57d9f3a7fe8b448b05792a69ba08c9, type: 3}
+  m_Sprite: {fileID: 1185083861, guid: 36aa2b0d71bd74d4a814bc9b9b06a803, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Transform:
     e00: 1

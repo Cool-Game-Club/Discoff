@@ -11,149 +11,140 @@ namespace CoolGameClub.Map
         [Header("Level")]
         [Range(1, 100)]
         [SerializeField] private int _numberOfRooms;
+        private enum LevelLayer { Walls, Floor }
         [SerializeField] private List<TilemapLayer> _tilemapLayers;
+
 
         [Header("Room Prefabs")]
         [Tooltip("The first room on each level")]
-        [SerializeField] private Room _spawnRoom;
+        [SerializeField] private RoomTemplate _spawnRoomTemplate;
         [Tooltip("Will be loaded between any horizontally-connecting rooms")]
-        [SerializeField] private Room _horizontalConnector;
+        [SerializeField] private RoomTemplate _horizontalHallwayTemplate;
         [Tooltip("Will be loaded between any vertically-connecting rooms")]
-        [SerializeField] private Room _verticalConnector;
+        [SerializeField] private RoomTemplate _verticalHallwayTemplate;
+        [SerializeField] private List<RoomTemplate> _loadableRoomTemplates;
 
-        [Header("Door Covers")]
-        [SerializeField] private Room _doorCoverLeft;
-        [SerializeField] private Room _doorCoverRight;
-        [SerializeField] private Room _doorCoverUp;
-        [SerializeField] private Room _doorCoverDown;
 
-        [Header("Dance Floor Tiles")]
-        [SerializeField] private DanceFloorTile _redTile;
-        [SerializeField] private DanceFloorTile _greenTile;
-        [SerializeField] private DanceFloorTile _blueTile;
-        [SerializeField] private DanceFloorTile _purpleTile;
-
-        [Header("Wall tiles")]
+        [Header("Wall tile")]
         [SerializeField] private TileBase _wallTile;
-        [SerializeField] private TileBase _roofTile;
-
-        [Header("Props")]
-        [SerializeField] private Tile _barTile;
-
-        private List<Room> _pickableRooms;
 
         private List<TileInfo<DoorMarkerTile>> _pickableDoors = new();
 
         private TilemapController _tilemapController;
 
-        private enum LevelLayer { Walls, Floor, Props, Triggers }
+        private List<Room> _rooms;
+
+        private Dictionary<Room, TileInfo<DoorMarkerTile>> _usedDoors = new();
+        private Dictionary<TileInfo<DoorMarkerTile>, Room> _doorRoomDict = new();
 
         public void Start() {
             _tilemapController = new(_tilemapLayers);
+            _rooms = new();
 
-            // Eww
-            _spawnRoom.Init();
-            _horizontalConnector.Init();
-            _verticalConnector.Init();
-            _doorCoverLeft.Init();
-            _doorCoverRight.Init();
-            _doorCoverUp.Init();
-            _doorCoverDown.Init();
+            InitRoomTemplates();
 
-            _pickableRooms = Resources.LoadAll<Room>("Rooms").ToList();
-            foreach (Room room in _pickableRooms) {
-                room.Init();
-            }
+            LoadRoomTemplate(_spawnRoomTemplate, Vector3Int.zero, Vector3Int.zero);
+            AddDoorsToPickable(_spawnRoomTemplate, Vector3Int.zero, Vector3Int.zero);
 
-            LoadRoom(_spawnRoom, Vector3Int.zero, Vector3Int.zero);
-            AddDoorsToUnused(_spawnRoom, Vector3Int.zero, Vector3Int.zero);
+            for (int i = 0; i < _numberOfRooms; i++) AddRandomRoom();
 
-            for (int i = 0; i < _numberOfRooms; i++) {
-                AddRandomRoom(i == _numberOfRooms - 1);
-            }
-
-            CoverUnusedDoors();
-            ReplaceBlankDanceFloor();
+            CreateDoors();
         }
 
-        private void AddRandomRoom(bool isBarRoom = false) {
+        private void CreateDoors() {
+            foreach (KeyValuePair<Vector3Int, (DoorDirection, Room)> pair in _usedDoors) {
+
+                //pair.Value.Item2.AddDoor();
+            }
+        }
+
+        private void InitRoomTemplates() {
+            _spawnRoomTemplate.Init();
+            _horizontalHallwayTemplate.Init();
+            _verticalHallwayTemplate.Init();
+            foreach (RoomTemplate roomTemplate in _loadableRoomTemplates) { roomTemplate.Init(); }
+        }
+
+        private void AddRandomRoom() {
 
             // Initialize the list of valid rooms to pick from
             // Rooms are removed from the list if they are deemed unvalid
-            List<Room> validRooms = new(_pickableRooms);
+            List<RoomTemplate> validRoomTemplates = new(_loadableRoomTemplates);
 
             // Only execute if there are rooms to pick from
-            while (validRooms.Count > 0) {
+            while (validRoomTemplates.Count > 0) {
 
                 // Choose a random room from the list of valid rooms
-                Room randomRoom = validRooms[Random.Range(0, validRooms.Count)];
+                RoomTemplate randomRoomTemplate = validRoomTemplates[Random.Range(0, validRoomTemplates.Count)];
 
                 // Remove the picked room from the list to prevent it being picked again
-                validRooms.Remove(randomRoom);
+                validRoomTemplates.Remove(randomRoomTemplate);
 
                 // Find all the valid door directions that can be picked from in the room
                 // Example: If room only has a door going up -> only pick doors that are down in the level
                 // A HashSet is a list that only has unique elements, so each direction will only be in the list once even if it is added multiple times
                 HashSet<DoorDirection> validDoorDirections = new();
-                foreach (TileInfo<DoorMarkerTile> door in randomRoom.GetDoorMarkerTiles()) {
-                    validDoorDirections.Add(door.Tile.OppositeDirection);
+                foreach (TileInfo<DoorMarkerTile> doorMakerTile in randomRoomTemplate.GetDoorMarkerTiles()) {
+                    validDoorDirections.Add(doorMakerTile.Tile.OppositeDirection);
                 }
 
                 // Find all the doors in the level that have a valid direction
-                List<TileInfo<DoorMarkerTile>> validDoors = new();
+                List<TileInfo<DoorMarkerTile>> validDoorMarkerTiles = new();
                 foreach (TileInfo<DoorMarkerTile> door in _pickableDoors) {
                     if (validDoorDirections.Contains(door.Tile.Direction)) {
-                        validDoors.Add(door);
+                        validDoorMarkerTiles.Add(door);
                     }
                 }
 
                 // Only execute if there are doors to pick from
-                while (validDoors.Count > 0) {
+                while (validDoorMarkerTiles.Count > 0) {
 
                     // Choose a random door from the list of valid doors
                     // The list of valid doors will only be doors that 
-                    TileInfo<DoorMarkerTile> randomDoor = validDoors[Random.Range(0, validDoors.Count)];
+                    TileInfo<DoorMarkerTile> randomLevelDoorMarkerTile = validDoorMarkerTiles[Random.Range(0, validDoorMarkerTiles.Count)];
 
                     // Remove the picked door from the list to prevent it being picked again
-                    validDoors.Remove(randomDoor);
+                    validDoorMarkerTiles.Remove(randomLevelDoorMarkerTile);
+
 
                     // Find the correct connector for the random door
                     // The connector will be placed between the picked random door and the picked random room
-                    Room connector = null;
-                    if (randomDoor.Tile.Direction == DoorDirection.Left || randomDoor.Tile.Direction == DoorDirection.Right) {
-                        connector = _horizontalConnector;
-                    } else if (randomDoor.Tile.Direction == DoorDirection.Up || randomDoor.Tile.Direction == DoorDirection.Down) {
-                        connector = _verticalConnector;
+                    RoomTemplate hallwayTemplate = null;
+                    if (randomLevelDoorMarkerTile.Tile.Direction == DoorDirection.Left || randomLevelDoorMarkerTile.Tile.Direction == DoorDirection.Right) {
+                        hallwayTemplate = _horizontalHallwayTemplate;
+                    } else if (randomLevelDoorMarkerTile.Tile.Direction == DoorDirection.Up || randomLevelDoorMarkerTile.Tile.Direction == DoorDirection.Down) {
+                        hallwayTemplate = _verticalHallwayTemplate;
                     }
 
                     // Find positions relating to the connector
-                    Vector3Int connectorRoomOrigin = connector.GetDoorMarkerTile(randomDoor.Tile.OppositeDirection).Pos;
-                    Vector3Int connectorLevelPos = randomDoor.Pos + randomDoor.Tile.DirectionVector;
+                    Vector3Int connectorRoomOrigin = hallwayTemplate.GetDoorMarkerTiles().Find(x => x.Tile.Direction == randomLevelDoorMarkerTile.Tile.OppositeDirection).Pos;
+                    Vector3Int connectorLevelPos = randomLevelDoorMarkerTile.Pos + randomLevelDoorMarkerTile.Tile.DirectionVector;
 
                     // Find positions relating to the random room
-                    Vector3Int randomRoomRoomOrigin = randomRoom.GetDoorMarkerTile(randomDoor.Tile.OppositeDirection).Pos;
-                    Vector3Int randomRoomLevelPos = connector.GetDoorMarkerTile(randomDoor.Tile.Direction).Pos + connectorLevelPos - connectorRoomOrigin + randomDoor.Tile.DirectionVector;
+                    List<TileInfo<DoorMarkerTile>> validRandomRoomTemplateDoorMarkerTiles = randomRoomTemplate.GetDoorMarkerTiles().FindAll(x => x.Tile.Direction == randomLevelDoorMarkerTile.Tile.OppositeDirection).ToList();
+                    TileInfo<DoorMarkerTile> randomRoomTemplateDoorMarkerTile = validRandomRoomTemplateDoorMarkerTiles[Random.Range(0, validRandomRoomTemplateDoorMarkerTiles.Count)];
+
+                    Vector3Int randomRoomTemplateRoomOrigin = randomRoomTemplateDoorMarkerTile.Pos;
+                    Vector3Int randomRoomTemplateLevelPos = hallwayTemplate.GetDoorMarkerTiles().Find(x => x.Tile.Direction == randomLevelDoorMarkerTile.Tile.Direction).Pos + connectorLevelPos - connectorRoomOrigin + randomLevelDoorMarkerTile.Tile.DirectionVector;
 
                     // Check if the connector and room can be loaded without overlapping other rooms
-                    if (CanLoadRoom(connector, connectorRoomOrigin, connectorLevelPos) && CanLoadRoom(randomRoom, randomRoomRoomOrigin, randomRoomLevelPos)) {
+                    if (CanLoadRoomTemplate(hallwayTemplate, connectorRoomOrigin, connectorLevelPos) && CanLoadRoomTemplate(randomRoomTemplate, randomRoomTemplateRoomOrigin, randomRoomTemplateLevelPos)) {
 
                         // Removes the picked random door from the global list because a room is generated there
-                        _pickableDoors.Remove(randomDoor);
+                        _pickableDoors.Remove(randomLevelDoorMarkerTile);
 
                         // Load the connector and random room to the level
-                        LoadRoom(connector, connectorRoomOrigin, connectorLevelPos);
-                        LoadRoom(randomRoom, randomRoomRoomOrigin, randomRoomLevelPos);
+                        LoadRoomTemplate(hallwayTemplate, connectorRoomOrigin, connectorLevelPos);
+                        LoadRoomTemplate(randomRoomTemplate, randomRoomTemplateRoomOrigin, randomRoomTemplateLevelPos);
 
-                        // Add the doors from the random room to the global list of pickable doors, making sure to exclude the entrance
-                        AddDoorsToUnused(randomRoom, randomRoomRoomOrigin, randomRoomLevelPos, randomDoor.Tile.OppositeDirection);
+                        AddDoorsToPickable(randomRoomTemplate, randomRoomTemplateRoomOrigin, randomRoomTemplateLevelPos, randomRoomTemplateRoomOrigin);
 
-                        // Load the bar if it is a bar room
-                        if (isBarRoom) LoadBar(randomRoom, randomRoomRoomOrigin, randomRoomLevelPos);
+                        // TODO SPAWN ROOM BARROOM ETC.
+                        Room room = new Room();
 
                         // Return out of the method to prevent more rooms spawning
                         return;
                     }
-
                     // If there are no doors to pick from either loop back and try new room or if there are no rooms to try, drop metal pipe
                 }
                 // If the list of valid rooms is empty, there are no rooms that can be loaded => drop metal pipe
@@ -161,31 +152,18 @@ namespace CoolGameClub.Map
             Debug.LogError("https://www.youtube.com/watch?v=f8mL0_4GeV0");
         }
 
-
-        /// <summary>
-        /// Loads a room to the Level tilemap at the given position from the given room origin.
-        /// </summary>
-        /// <param name="room">The room to load.</param>
-        /// <param name="roomOrigin">The room position to originate the loading from.</param>
-        /// <param name="levelPos">The level position to load to.</param>
-        private void LoadRoom(Room room, Vector3Int roomOrigin, Vector3Int levelPos) {
-            foreach (TileInfo<TileBase> tileInfo in room.GetWallsAndFloorTiles()) {
-                LevelLayer layer = (tileInfo.Tile == _wallTile || tileInfo.Tile == _roofTile) ? LevelLayer.Walls : LevelLayer.Floor;
-                _tilemapController.SetTile(tileInfo.Pos + levelPos - roomOrigin, tileInfo.Tile, (int)layer);
+        private void LoadRoomTemplate(RoomTemplate roomTemplate, Vector3Int roomOrigin, Vector3Int levelPos) {
+            foreach (TileInfo<TileBase> tileInfo in roomTemplate.GetEnvironmentTiles()) {
+                int layerIndex = (tileInfo.Tile == _wallTile) ? (int)LevelLayer.Walls : (int)LevelLayer.Floor;
+                _tilemapController.SetTile(tileInfo.Pos + levelPos - roomOrigin, tileInfo.Tile, layerIndex);
             }
         }
 
-        /// <summary>
-        /// Checks whether a room can be loaded at the given position without overlapping other rooms.
-        /// </summary>
-        /// <param name="room">The room to test.</param>
-        /// <param name="roomOrigin">The room position to originate the loading from.</param>
-        /// <param name="levelPos">The level position to load to.</param>
-        /// <returns>Whether the room can be loaded the the position.</returns>
-        private bool CanLoadRoom(Room room, Vector3Int roomOrigin, Vector3Int levelPos) {
-            foreach (TileInfo<TileBase> tileInfo in room.GetWallsAndFloorTiles()) {
-                bool containsTileWalls = _tilemapController.ContainsTile(tileInfo.Pos + levelPos - roomOrigin, (int)LevelLayer.Walls);
-                bool containsTileFloor = _tilemapController.ContainsTile(tileInfo.Pos + levelPos - roomOrigin, (int)LevelLayer.Floor);
+        private bool CanLoadRoomTemplate(RoomTemplate roomTemplate, Vector3Int roomOrigin, Vector3Int levelPos) {
+            foreach (TileInfo<TileBase> tileInfo in roomTemplate.GetEnvironmentTiles()) {
+                Vector3Int pos = tileInfo.Pos + levelPos - roomOrigin;
+                bool containsTileWalls = _tilemapController.ContainsTile(pos, (int)LevelLayer.Walls);
+                bool containsTileFloor = _tilemapController.ContainsTile(pos, (int)LevelLayer.Floor);
                 if (containsTileWalls || containsTileFloor) {
                     return false;
                 }
@@ -193,53 +171,25 @@ namespace CoolGameClub.Map
             return true;
         }
 
-        private void LoadBar(Room room, Vector3Int roomOrigin, Vector3Int levelPos) {
-            TileInfo<MarkerTile> barMarkerTile = room.GetBarMarkerTile();
-            _tilemapController.SetTile(barMarkerTile.Pos + levelPos - roomOrigin, _barTile, (int)LevelLayer.Props);
-        }
-
-        private void AddDoorsToUnused(Room room, Vector3Int roomOrigin, Vector3Int levelPos, DoorDirection directionException = DoorDirection.None) {
-            foreach (TileInfo<DoorMarkerTile> doorMarkerTile in room.GetDoorMarkerTiles()) {
-                if (doorMarkerTile.Tile.Direction != directionException) {
+        private void AddDoorsToPickable(RoomTemplate roomTemplate, Vector3Int roomOrigin, Vector3Int levelPos, Vector3Int? exception = null) {
+            foreach (TileInfo<DoorMarkerTile> doorMarkerTile in roomTemplate.GetDoorMarkerTiles()) {
+                if (exception == null || doorMarkerTile.Pos != exception) {
                     _pickableDoors.Add(new TileInfo<DoorMarkerTile>(doorMarkerTile.Pos + levelPos - roomOrigin, doorMarkerTile.Tile));
                 }
             }
         }
 
-        private void CoverUnusedDoors() {
-            foreach (TileInfo<DoorMarkerTile> tileInfo in _pickableDoors) {
-                Room cover = tileInfo.Tile.Direction switch {
-                    DoorDirection.Left => _doorCoverLeft,
-                    DoorDirection.Right => _doorCoverRight,
-                    DoorDirection.Up => _doorCoverUp,
-                    DoorDirection.Down => _doorCoverDown,
-                    _ => null
-                };
-                LoadRoom(cover, cover.GetDoorMarkerTile(tileInfo.Tile.Direction).Pos, tileInfo.Pos);
-            }
-        }
-
-        private void ReplaceBlankDanceFloor() {
-            foreach (TileInfo<BlankDanceFloorTile> tileInfo in _tilemapController.GetTiles<BlankDanceFloorTile>((int)LevelLayer.Floor)) {
-                DanceFloorTile randomTile = Colors.RandomColor() switch {
-                    Colors.Color.Red => _redTile,
-                    Colors.Color.Green => _greenTile,
-                    Colors.Color.Blue => _blueTile,
-                    Colors.Color.Purple => _purpleTile,
-                    _ => null,
-                };
-                _tilemapController.SetTile(tileInfo.Pos, randomTile, (int)LevelLayer.Floor);
-            }
-        }
-
-        private Colors.Color? GetColorOfTile(Vector2 worldPos) {
+        public Colors.Color? GetColorOfTile(Vector2 worldPos) {
             Vector3Int pos = _tilemapController.WorldToCell(new Vector3(worldPos.x, worldPos.y, 0));
+            int layerIndex = (int)LevelLayer.Floor;
 
-            if (!_tilemapController.ContainsTile(pos, (int)LevelLayer.Floor)) return null;
+            if (!_tilemapController.ContainsTile(pos, layerIndex)) return null;
 
-            if (_tilemapController.GetTile(pos, (int)LevelLayer.Floor) is DanceFloorTile danceFloorTile) return danceFloorTile.Color;
+            TileInfo<DanceFloorTile> danceFloorTile = _tilemapController.GetTile<DanceFloorTile>(pos, layerIndex);
+            if (danceFloorTile != null) return danceFloorTile.Tile.Color;
 
             return null;
+
         }
     }
 }

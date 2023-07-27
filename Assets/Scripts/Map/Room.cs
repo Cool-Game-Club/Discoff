@@ -1,40 +1,43 @@
 using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.Tilemaps;
 
 namespace CoolGameClub.Map
 {
-    public class Room : MonoBehaviour
+    public class Room
     {
-        [SerializeField] private List<TilemapLayer> _tilemapLayers;
-        private TilemapController _tilemapController;
+        private bool _isDefeated;
+        private bool _isSpawn;
+        private bool _isBarroom;
 
-        private enum RoomLayer { WallsAndFloor, Markers }
+        private List<Door> _doors;
 
-        public void Init() {
-            _tilemapController = new(_tilemapLayers);
+        public Room(bool isSpawn = false, bool isBarroom = false) {
+            _doors = new();
+            _isSpawn = isSpawn;
+            _isBarroom = isBarroom;
         }
 
-        public List<TileInfo<TileBase>> GetWallsAndFloorTiles() {
-            return _tilemapController.GetTiles((int)RoomLayer.WallsAndFloor);
-        }
+        public void AddDoor(Door door) => _doors.Add(door);
 
-        public List<TileInfo<DoorMarkerTile>> GetDoorMarkerTiles() {
-            return _tilemapController.GetTiles<DoorMarkerTile>((int)RoomLayer.Markers);
-        }
+        public void OnPlayerEnter() {
+            if (_isDefeated) return;
 
-        public TileInfo<DoorMarkerTile> GetDoorMarkerTile(DoorDirection doorDirection) {
-            foreach (TileInfo<DoorMarkerTile> doorMarkerTile in _tilemapController.GetTiles<DoorMarkerTile>((int)RoomLayer.Markers)) {
-                if (doorMarkerTile.Tile.Direction == doorDirection) return doorMarkerTile;
+            // TODO Lock room
+            foreach (Door door in _doors) {
+                door.Open(false);
             }
-            return null;
+
+            // TODO Spawn enemies
         }
 
-        public TileInfo<MarkerTile> GetBarMarkerTile() {
-            foreach (TileInfo<MarkerTile> markerTile in _tilemapController.GetTiles<MarkerTile>((int)RoomLayer.Markers)) {
-                if (markerTile.Tile.Type == MarkerTile.MarkerType.Bar) return markerTile;
+        public void OnDefeat() {
+            _isDefeated = true;
+
+            // TODO Unlock doors
+            foreach (Door door in _doors) {
+                door.Open(true);
             }
-            return null;
+
+            // TODO Give upgrade if barroom
         }
     }
 }
