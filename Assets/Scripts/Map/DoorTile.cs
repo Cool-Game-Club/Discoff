@@ -6,7 +6,7 @@ namespace CoolGameClub.Map
     [CreateAssetMenu(menuName = "2D/Tiles/Door")]
     public class DoorTile : Tile
     {
-        [SerializeField] private DoorDirection doorDirection;
+        [SerializeField] private Direction doorDirection;
 
         [SerializeField] private Sprite open;
         [SerializeField] private Sprite closed;

@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1644040824771592937}
   - component: {fileID: 4402186869582604200}
   m_Layer: 0
-  m_Name: Vertical Door
+  m_Name: Horizontal Door
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -75,7 +75,7 @@ SpriteRenderer:
   m_SortingLayerID: -713473203
   m_SortingLayer: 2
   m_SortingOrder: 2
-  m_Sprite: {fileID: -1152434713, guid: cd025d13c5baebe4e8a71297dd5dc207, type: 3}
+  m_Sprite: {fileID: 1475687355, guid: dddc949fcd4ed444b8e31be2be7878d9, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -96,7 +96,7 @@ Animator:
   m_GameObject: {fileID: 7888566529202332123}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 9f96ceb0a12e44b43b4617d52ea1825c, type: 2}
+  m_Controller: {fileID: 9100000, guid: 9ca92f3340673c744b99b734d7e665e3, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0

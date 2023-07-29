@@ -15,16 +15,9 @@ namespace CoolGameClub.Map
             _tilemapController = new(_tilemapLayers);
         }
 
-        //public List<TileInfo<TileBase>> EnvironmentTiles { get => _tilemapController.GetTiles<TileBase>((int)RoomTemplateLayer.Environment); }
-        //public List<TileInfo<DoorMarkerTile>> DoorMarkerTiles { get => _tilemapController.GetTiles<DoorMarkerTile>((int)RoomTemplateLayer.Markers); }
+        public List<TileInfo<TileBase>> EnvironmentTiles => _tilemapController.GetTiles<TileBase>((int)RoomTemplateLayer.Environment);
 
-        public List<TileInfo<TileBase>> GetEnvironmentTiles() {
-            return _tilemapController.GetTiles<TileBase>((int)RoomTemplateLayer.Environment);
-        }
-
-        public List<TileInfo<DoorMarkerTile>> GetDoorMarkerTiles() {
-            return _tilemapController.GetTiles<DoorMarkerTile>((int)RoomTemplateLayer.Markers);
-        }
+        public List<TileInfo<DoorMarkerTile>> DoorMarkerTiles => _tilemapController.GetTiles<DoorMarkerTile>((int)RoomTemplateLayer.Markers);
 
         public TileInfo<DoorMarkerTile> GetDoorMarkerTileAtPos(Vector3Int pos) {
             int layerIndex = (int)RoomTemplateLayer.Markers;

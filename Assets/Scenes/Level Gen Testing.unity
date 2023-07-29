@@ -182,16 +182,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a41e2a609c3f2284aa8f9e9117d01074, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _numberOfRooms: 20
+  _numberOfRooms: 10
   _tilemapLayers:
   - Tilemap: {fileID: 1151714662}
   - Tilemap: {fileID: 551061872}
   _spawnRoomTemplate: {fileID: 6606071128543982786, guid: c4b245b4b884cd44894b7db580d5d865, type: 3}
-  _horizontalHallwayTemplate: {fileID: 7414498872701116561, guid: ae95b1b13c7a698468afdf78bfd78409, type: 3}
-  _verticalHallwayTemplate: {fileID: 7414498872701116561, guid: c21dfb203f8513749b90c815a8016116, type: 3}
+  _horizontalConnectorTemplate: {fileID: 7414498872701116561, guid: ae95b1b13c7a698468afdf78bfd78409, type: 3}
+  _verticalConnectorTemplate: {fileID: 7414498872701116561, guid: c21dfb203f8513749b90c815a8016116, type: 3}
   _loadableRoomTemplates:
   - {fileID: 6606071128543982786, guid: c4b245b4b884cd44894b7db580d5d865, type: 3}
+  - {fileID: 6606071128543982786, guid: ca3ff15cb9e6ec844ad03cf5a200c1a2, type: 3}
   _wallTile: {fileID: 11400000, guid: 2f582a7b994873b4bac760a37384add2, type: 2}
+  _floorTile: {fileID: 11400000, guid: 5399089316a9ba94aa9967ede06df9e1, type: 2}
+  _horizontalDoorPrefab: {fileID: 4402186869582604200, guid: 9a9347973df78ef449ab89c75092d4b4, type: 3}
+  _verticalDoorPrefab: {fileID: 4402186869582604200, guid: 38d03739fb0ab22479df8828592af483, type: 3}
 --- !u!1 &112069651
 GameObject:
   m_ObjectHideFlags: 0
@@ -236,7 +240,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 622f9c47f0421fe4dbc72a7e5447bcfb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _seed: 123
+  _seed: 1
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -836,109 +840,3 @@ TilemapCollider2D:
   m_MaximumTileChangeCount: 1000
   m_ExtrusionFactor: 0
   m_UseDelaunayMesh: 0
---- !u!1 &2146512405
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2146512408}
-  - component: {fileID: 2146512407}
-  - component: {fileID: 2146512409}
-  m_Layer: 0
-  m_Name: Vertical_Door_0
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!212 &2146512407
-SpriteRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2146512405}
-  m_Enabled: 1
-  m_CastShadows: 0
-  m_ReceiveShadows: 0
-  m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 0
-  m_RayTraceProcedural: 0
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 0
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_Sprite: {fileID: -1152434713, guid: cd025d13c5baebe4e8a71297dd5dc207, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_FlipX: 0
-  m_FlipY: 0
-  m_DrawMode: 0
-  m_Size: {x: 1, y: 4}
-  m_AdaptiveModeThreshold: 0.5
-  m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
-  m_MaskInteraction: 0
-  m_SpriteSortPoint: 0
---- !u!4 &2146512408
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2146512405}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.9370162, y: -2.7221813, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!95 &2146512409
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2146512405}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 9f96ceb0a12e44b43b4617d52ea1825c, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
